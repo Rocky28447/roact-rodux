@@ -92,7 +92,7 @@ local function connect(mapStateToPropsOrThunk, mapDispatchToProps)
 		function Connection:createStoreConnection()
 			self.storeChangedConnection = self.store.changed:connect(function(storeState)
 				self:setState(function(prevState, props)
-					local mappedStoreState = prevState.mapStateToProps(storeState, props)
+					local mappedStoreState = prevState.mapStateToProps(storeState, props.innerProps)
 
 					-- We run this check here so that we only check shallow
 					-- equality with the result of mapStateToProps, and not the
@@ -101,7 +101,7 @@ local function connect(mapStateToPropsOrThunk, mapDispatchToProps)
 						return nil
 					end
 
-					return prevState.stateUpdater(props, prevState, mappedStoreState)
+					return prevState.stateUpdater(props.innerProps, prevState, mappedStoreState)
 				end)
 			end)
 		end
