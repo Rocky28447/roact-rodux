@@ -13,3 +13,7 @@
 # Rotriever
 rotriever.lock
 Packages
+wally.lock
+
+# Luau Language Server Sourcemap
+/sourcemap.json
