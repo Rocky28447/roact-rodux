@@ -1,4 +1,4 @@
-local Roact = require(script.Parent.Parent.Roact)
+local React = require(script.Parent.Parent.React)
 local shallowEqual = require(script.Parent.shallowEqual)
 local join = require(script.Parent.join)
 local StoreContext = require(script.Parent.StoreContext)
@@ -81,7 +81,7 @@ local function connect(mapStateToPropsOrThunk, mapDispatchToProps)
 
 		local componentName = ("RoduxConnection(%s)"):format(tostring(innerComponent))
 
-		local Connection = Roact.Component:extend(componentName)
+		local Connection = React.Component:extend(componentName)
 
 		function Connection.getDerivedStateFromProps(nextProps, prevState)
 			if prevState.stateUpdater ~= nil then
@@ -200,13 +200,13 @@ local function connect(mapStateToPropsOrThunk, mapDispatchToProps)
 		end
 
 		function Connection:render()
-			return Roact.createElement(innerComponent, self.state.propsForChild)
+			return React.createElement(innerComponent, self.state.propsForChild)
 		end
 
 		return function(props)
-			return Roact.createElement(StoreContext.Consumer, {
+			return React.createElement(StoreContext.Consumer, {
 				render = function(store)
-					return Roact.createElement(Connection, {
+					return React.createElement(Connection, {
 						innerProps = props,
 						store = store,
 					})

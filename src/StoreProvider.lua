@@ -1,8 +1,8 @@
-local Roact = require(script.Parent.Parent.Roact)
+local React = require(script.Parent.Parent.React)
 
 local StoreContext = require(script.Parent.StoreContext)
 
-local StoreProvider = Roact.Component:extend("StoreProvider")
+local StoreProvider = React.Component:extend("StoreProvider")
 
 function StoreProvider.validateProps(props)
 	local store = props.store
@@ -17,9 +17,9 @@ function StoreProvider:init(props)
 end
 
 function StoreProvider:render()
-	return Roact.createElement(StoreContext.Provider, {
+	return React.createElement(StoreContext.Provider, {
 		value = self.store
-	}, self.props[Roact.Children])
+	}, self.props.children)
 end
 
 return StoreProvider
